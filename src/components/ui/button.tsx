@@ -5,19 +5,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-[var(--space-1)] whitespace-nowrap rounded-[var(--radius)] text-[var(--font-size-base)] font-medium cursor-pointer transition duration-[var(--motion-duration)] ease-[var(--motion-easing)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:inline-size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-[var(--space-1)] whitespace-nowrap rounded-[var(--radius)] border-2 font-mono text-sm font-semibold uppercase tracking-[0.12em] cursor-pointer transition duration-[var(--motion-duration)] ease-[var(--motion-easing)] focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:inline-size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "border-primary bg-primary text-primary-foreground hover:border-foreground hover:bg-foreground hover:text-background",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "border-destructive bg-destructive text-destructive-foreground hover:bg-foreground hover:text-background",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border-input bg-background hover:bg-foreground hover:text-background",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+          "border-secondary bg-secondary text-secondary-foreground hover:bg-primary",
+        ghost:
+          "border-transparent hover:border-foreground hover:bg-foreground hover:text-background",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

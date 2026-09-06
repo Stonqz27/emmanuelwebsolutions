@@ -87,13 +87,13 @@ function ServiceDetail() {
                 Ready to start?
               </p>
               <p className="font-display text-2xl font-bold mb-6 leading-tight">
-                Book a free 20-minute consultation.
+                Start with $50. Pay $50 after approval.
               </p>
               <Link
                 to="/contact"
                 className="inline-block px-6 py-3 bg-background text-foreground font-bold rounded-xl hover:scale-[1.02] transition-transform"
               >
-                Get in touch
+                Start your website
               </Link>
             </div>
           </aside>

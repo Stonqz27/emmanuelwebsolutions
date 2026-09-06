@@ -25,36 +25,38 @@ function TermsPage() {
           </h1>
 
           <p className="mt-6 text-base text-muted-foreground">
-            Last updated: July 1, 2026
+            Last updated: September 5, 2026
           </p>
 
           <section className="mt-8 space-y-6 text-sm text-foreground/90">
             <p>
               These Terms of Service govern your use of Emmanuel Web
-              Solutions’ website and services. By accessing or using our
-              services you agree to these terms. This document is a general
-              template and does not constitute legal advice.
+              Solutions&apos; website and services. The exact scope and schedule
+              for a project are confirmed in writing before work begins.
             </p>
 
             <h2 className="font-medium text-lg">Services</h2>
             <p>
-              We provide web design and development services. Specific project
-              terms (scope, deliverables, payment, timeline) are defined in
-              individual contracts.
+              The standard $100 offer covers an informational small-business
+              website with the agreed pages and features. Online stores, complex
+              integrations, and paid third-party services are outside that
+              standard scope unless agreed separately.
             </p>
 
             <h2 className="font-medium text-lg">Payment &amp; refunds</h2>
             <p>
-              Project fees and payment schedules are set in proposals and
-              contracts. Refunds and cancellations are governed by those
-              agreements.
+              The standard payment schedule is $50 before work begins and $50
+              after the finished website is approved, before launch or file
+              transfer. Any different payment, cancellation, or refund terms
+              must be agreed in writing before work begins.
             </p>
 
             <h2 className="font-medium text-lg">Intellectual property</h2>
             <p>
               Unless otherwise specified, we retain ownership of pre-existing
               tools and components. Project deliverables are licensed or
-              transferred as described in the contract.
+              transferred as described in the written project agreement after
+              full payment is received.
             </p>
 
             <h2 className="font-medium text-lg">Limitation of liability</h2>
@@ -65,7 +67,8 @@ function TermsPage() {
 
             <h2 className="font-medium text-lg">Contact</h2>
             <p>
-              For questions about these terms, contact hello@emmanuelwebsolutions.me.
+              For questions about these terms, contact
+              hello@emmanuelwebsolutions.me.
             </p>
           </section>
         </div>

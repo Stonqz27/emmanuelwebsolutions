@@ -1,20 +1,15 @@
-import caseNexus from "@/assets/case-nexus.jpg";
-import caseVantage from "@/assets/case-vantage.jpg";
-import caseBistro from "@/assets/case-bistro.jpg";
-import caseSalon from "@/assets/case-salon.jpg";
-
 export const services = [
   {
     slug: "website-design",
     title: "Website Design",
-    tagline: "Custom websites engineered from scratch.",
+    tagline: "A professional website designed for your business.",
     blurb:
-      "Bespoke websites built around your brand and customers — no themes, no templates, no compromises.",
+      "A clear, professional website built around your business, your customers, and the action you want visitors to take.",
     deliverables: [
       "Discovery & competitor audit",
       "Wireframes and high-fidelity design",
       "Hand-coded responsive build",
-      "CMS setup and team training",
+      "Contact and call-to-action setup",
       "Performance & accessibility tuning",
     ],
     timeline: "5–7 days",
@@ -37,7 +32,7 @@ export const services = [
   {
     slug: "mobile-optimization",
     title: "Mobile Optimization",
-    tagline: "Sites that load instantly on the device that matters most.",
+    tagline: "A better experience on the device that matters most.",
     blurb:
       "Over 70% of local searches happen on mobile. We make sure your site is fast, tappable, and conversion-ready on every screen.",
     deliverables: [
@@ -52,75 +47,18 @@ export const services = [
   {
     slug: "local-seo",
     title: "Local SEO",
-    tagline: "Show up where your customers are searching.",
+    tagline: "Give search engines a clear foundation.",
     blurb:
-      "Technical SEO, schema markup, and a local content strategy that puts your business on the map — literally.",
+      "Basic technical SEO, clear page structure, and local signals help search engines understand your business.",
     deliverables: [
-      "Google Business Profile setup",
+      "Google Business Profile guidance",
       "Local schema markup",
-      "Citation & directory cleanup",
-      "Keyword & content roadmap",
-      "Monthly performance reports",
+      "Search-friendly page titles and descriptions",
+      "Keyword-aware content structure",
+      "Launch-day search checklist",
     ],
-    timeline: "Ongoing",
+    timeline: "Included in build",
   },
 ] as const;
 
 export type ServiceSlug = (typeof services)[number]["slug"];
-
-export const projects = [
-  {
-    slug: "nexus-platform",
-    name: "Nexus Platform",
-    category: "Fintech · SaaS Development",
-    summary:
-      "A modular dashboard for a regional fintech, rebuilt from a slow WordPress site into a sub-second React app.",
-    metrics: [
-      { label: "Page load", value: "0.8s" },
-      { label: "Lead increase", value: "+186%" },
-      { label: "Time to ship", value: "9 days" },
-    ],
-    cover: caseNexus,
-  },
-  {
-    slug: "vantage-arch",
-    name: "Vantage Arch",
-    category: "Real Estate · Brand Identity",
-    summary:
-      "An identity refresh and editorial portfolio site for a high-end architecture studio.",
-    metrics: [
-      { label: "Inquiries", value: "+212%" },
-      { label: "Avg session", value: "3:42" },
-      { label: "Lighthouse", value: "100" },
-    ],
-    cover: caseVantage,
-  },
-  {
-    slug: "the-gilded-fork",
-    name: "The Gilded Fork",
-    category: "Hospitality · Reservations",
-    summary:
-      "A neighborhood bistro went from a Facebook page to a fully booked restaurant with online reservations.",
-    metrics: [
-      { label: "Bookings", value: "+340%" },
-      { label: "Local rank", value: "#1" },
-      { label: "Build time", value: "6 days" },
-    ],
-    cover: caseBistro,
-  },
-  {
-    slug: "atelier-noir",
-    name: "Atelier Noir",
-    category: "Salon · Booking System",
-    summary:
-      "A premium salon's appointment system, redesigned around the stylist's day, not the customer's confusion.",
-    metrics: [
-      { label: "No-shows", value: "−54%" },
-      { label: "Repeat clients", value: "+78%" },
-      { label: "Mobile load", value: "0.6s" },
-    ],
-    cover: caseSalon,
-  },
-] as const;
-
-export type ProjectSlug = (typeof projects)[number]["slug"];

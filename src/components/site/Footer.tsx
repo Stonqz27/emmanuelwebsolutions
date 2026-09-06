@@ -1,63 +1,64 @@
 import { Link } from "@tanstack/react-router";
 
+const footerLinks = [
+  { to: "/services", label: "Services" },
+  { to: "/portfolio", label: "Portfolio" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
+  { to: "/privacy", label: "Privacy" },
+  { to: "/pricing", label: "Pricing" },
+  { to: "/terms", label: "Terms" },
+  { to: "/security", label: "Security" },
+] as const;
+
 export function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="border-t-2 border-foreground bg-background text-foreground">
       <div className="container-page py-24">
         <div className="max-w-3xl">
-          <p className="text-xs font-bold tracking-[0.2em] uppercase text-primary-foreground/70 mb-6">
-            Let's build
+          <p className="mb-6 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            [ Let&apos;s build ]
           </p>
-          <h2 className="font-display text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight">
+          <h2 className="font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
             Ready to elevate your presence?
           </h2>
-          <p className="mt-6 text-lg text-primary-foreground/80 max-w-xl">
-            Book a 20-minute consultation. We'll audit your current site live
-            and send you a recording — even if you don't hire us.
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+            Tell me what your business needs. I&apos;ll reply personally and
+            show you how the $100 website process works.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-6">
             <Link
               to="/contact"
-              className="px-8 py-4 bg-background text-foreground font-bold rounded-xl hover:scale-[1.02] active:scale-95 transition-transform shadow-xl"
+              className="border-2 border-foreground px-8 py-4 font-mono text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-foreground hover:text-background"
             >
-              Book a consultation
+              Start your $100 website
             </Link>
             <a
               href="mailto:hello@emmanuelwebsolutions.me"
-              className="text-primary-foreground/90 font-medium underline-offset-4 hover:underline"
+              className="font-mono text-sm font-medium text-primary underline-offset-4 hover:underline"
             >
               hello@emmanuelwebsolutions.me
+            </a>
+            {/* Replace the generic LinkedIn URL with Emmanuel's profile URL. */}
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-sm font-medium text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
+            >
+              LinkedIn
             </a>
           </div>
         </div>
 
-          <div className="mt-24 pt-10 border-t border-primary-foreground/15 flex flex-col md:flex-row justify-between gap-6 text-sm text-primary-foreground/60">
+        <div className="mt-24 flex flex-col justify-between gap-6 border-t-2 border-foreground pt-8 font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground md:flex-row">
           <p>© {new Date().getFullYear()} Emmanuel Web Solutions.</p>
-          <div className="flex gap-8">
-            <Link to="/services" className="hover:text-primary-foreground">
-              Services
-            </Link>
-            <Link to="/portfolio" className="hover:text-primary-foreground">
-              Portfolio
-            </Link>
-            <Link to="/about" className="hover:text-primary-foreground">
-              About
-            </Link>
-            <Link to="/contact" className="hover:text-primary-foreground">
-              Contact
-            </Link>
-            <Link to="/privacy" className="hover:text-primary-foreground">
-              Privacy
-            </Link>
-            <Link to="/pricing" className="hover:text-primary-foreground">
-              Pricing
-            </Link>
-            <Link to="/terms" className="hover:text-primary-foreground">
-              Terms
-            </Link>
-            <Link to="/security" className="hover:text-primary-foreground">
-              Security
-            </Link>
+          <div className="flex flex-wrap gap-x-6 gap-y-3 md:justify-end">
+            {footerLinks.map((link) => (
+              <Link key={link.to} to={link.to} className="hover:text-primary">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

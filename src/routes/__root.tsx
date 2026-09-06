@@ -10,7 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { CookieConsent } from "../components/ui/cookie-consent";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -86,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         {
           name: "description",
           content:
-            "Modern websites engineered for local businesses. Custom design, sub-second load times, and local SEO built in.",
+            "Professional websites for local businesses for $100 total: $50 to begin and $50 after approval.",
         },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
@@ -114,7 +113,6 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
-        <CookieConsent />
         <Scripts />
       </body>
     </html>

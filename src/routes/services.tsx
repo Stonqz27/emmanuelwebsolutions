@@ -36,16 +36,16 @@ function ServicesPage() {
             <span className="text-gradient italic">needs online.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            Four focused disciplines, woven together. We don't sell add-ons —
-            every project ships with design, performance, and local SEO built
-            in.
+            The essentials work together in one straightforward website. Every
+            $100 project includes design, mobile support, performance, and basic
+            search setup.
           </p>
           <div className="mt-10">
             <Link
               to="/pricing"
               className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/15 transition hover:bg-primary/90"
             >
-              View pricing packages
+              See the $100 website
             </Link>
           </div>
         </div>

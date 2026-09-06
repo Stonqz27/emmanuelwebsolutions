@@ -35,10 +35,12 @@ export function CookieConsent() {
   if (consent) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:bottom-6 z-50">
-      <div className="max-w-3xl mx-auto bg-card/95 backdrop-blur rounded-xl shadow-lg border p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center gap-4">
+    <div className="fixed bottom-4 left-4 right-4 z-50 md:bottom-6 md:left-auto md:right-6">
+      <div className="mx-auto flex max-w-3xl flex-col items-start gap-4 border-2 border-foreground bg-card p-4 md:flex-row md:items-center md:p-6">
         <div className="flex-1">
-          <p className="font-medium">We use cookies to improve the site</p>
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+            We use cookies to improve the site
+          </p>
           <p className="mt-2 text-sm text-muted-foreground">
             Functional cookies are required for the site to work. Analytics
             cookies help us improve performance. Manage your preferences or
@@ -54,19 +56,19 @@ export function CookieConsent() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => save({ analytics: false, functional: true })}
-            className="rounded-md px-4 py-2 bg-background border text-foreground"
+            className="border-2 border-foreground bg-background px-4 py-2 font-mono text-xs uppercase tracking-wider text-foreground hover:bg-foreground hover:text-background"
           >
             Decline
           </button>
           <button
             onClick={() => save({ analytics: true, functional: true })}
-            className="rounded-md px-4 py-2 bg-primary text-primary-foreground font-bold"
+            className="border-2 border-primary bg-primary px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-primary-foreground hover:border-foreground hover:bg-foreground hover:text-background"
           >
             Accept
           </button>
           <button
             onClick={() => setShowManage((s) => !s)}
-            className="ml-2 text-sm text-muted-foreground"
+            className="ml-2 font-mono text-xs uppercase text-muted-foreground hover:text-primary"
             aria-expanded={showManage}
           >
             Manage
@@ -74,7 +76,7 @@ export function CookieConsent() {
         </div>
 
         {showManage && (
-          <div className="w-full mt-4 md:mt-0 md:w-72 bg-background rounded-md p-3 border">
+          <div className="mt-4 w-full border-2 border-foreground bg-background p-3 md:mt-0 md:w-72">
             <label className="flex items-center justify-between">
               <span className="text-sm">Analytics cookies</span>
               <input

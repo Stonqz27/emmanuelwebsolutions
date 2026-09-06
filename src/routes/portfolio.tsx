@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site/PageShell";
-import { projects } from "@/lib/site-data";
 
 const demoSites = [
   {
@@ -112,13 +111,12 @@ export const Route = createFileRoute("/portfolio")({
       {
         name: "description",
         content:
-          "Recent case studies: fintech dashboards, architecture studios, restaurants, and salons rebuilt for speed and conversion.",
+          "Explore interactive website concepts created by Emmanuel Web Solutions for restaurants, salons, local services, and professional businesses.",
       },
       { property: "og:title", content: "Portfolio — Emmanuel Web Solutions" },
       {
         property: "og:description",
-        content:
-          "Recent case studies and digital transformations from Emmanuel Web Solutions.",
+        content: "Interactive website concepts by Emmanuel Web Solutions.",
       },
     ],
   }),
@@ -135,71 +133,29 @@ function PortfolioPage() {
             Portfolio
           </p>
           <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight max-w-3xl leading-[1.02]">
-            Recent <span className="text-gradient italic">transformations.</span>
+            Websites you can <span className="text-gradient">explore.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            A collection of recent projects — bridging vision and digital reality across fintech, hospitality, and local services.
+            These are original concept websites—not client case studies. Open
+            each live demo to explore the design, mobile layout, and customer
+            journey I can create for your business.
           </p>
         </div>
       </section>
 
       <section className="pb-32">
-        <div className="container-page space-y-24">
-          {projects.map((p, i) => (
-            <article
-              key={p.slug}
-              className={`grid md:grid-cols-12 gap-12 items-center ${
-                i % 2 === 1 ? "md:[&>div:first-child]:order-2" : ""
-              }`}
-            >
-              <div className="md:col-span-7">
-                <div className="overflow-hidden rounded-3xl bg-surface border border-border aspect-[4/3]">
-                  <img
-                    src={p.cover}
-                    alt={p.name}
-                    width={1200}
-                    height={900}
-                    loading="lazy"
-                    className="size-full object-cover"
-                  />
-                </div>
-              </div>
-              <div className="md:col-span-5">
-                <p className="text-xs font-bold tracking-[0.18em] uppercase text-primary mb-3">
-                  {p.category}
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-5">
-                  {p.name}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  {p.summary}
-                </p>
-                <dl className="grid grid-cols-3 gap-4 border-t border-border pt-6">
-                  {p.metrics.map((m) => (
-                    <div key={m.label}>
-                      <dt className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground mb-2">
-                        {m.label}
-                      </dt>
-                      <dd className="font-display text-xl md:text-2xl font-bold">
-                        {m.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </article>
-          ))}
-
+        <div className="container-page">
           <div className="space-y-8">
             <div>
               <p className="text-xs font-bold tracking-[0.18em] uppercase text-primary mb-3">
-                Interactive Demos
+                Interactive concept work
               </p>
               <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight">
-                Live demos built like the case studies above
+                Ten industries. Ten working demos.
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mt-6">
-                These demo sites are displayed in the same portfolio flow so you can replace the placeholder covers with your own images and keep the same visual rhythm.
+                Each demo is a fictional brand created to demonstrate my design
+                range. No invented client claims, testimonials, or results.
               </p>
             </div>
 

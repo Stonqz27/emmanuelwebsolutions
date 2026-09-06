@@ -1,140 +1,154 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/site/PageShell";
-import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Emmanuel Web Solutions" },
+      { title: "$100 Website Pricing — Emmanuel Web Solutions" },
       {
         name: "description",
         content:
-          "Affordable website packages from $300 with clear service scope and final pricing confirmed by call.",
+          "One professional small-business website for $100 total: $50 to begin and $50 after approval.",
       },
-      { property: "og:title", content: "Pricing — Emmanuel Web Solutions" },
+      {
+        property: "og:title",
+        content: "$100 Website Pricing — Emmanuel Web Solutions",
+      },
       {
         property: "og:description",
         content:
-          "Simple website pricing packages for local businesses, with final costs confirmed in a quick call.",
+          "Simple website pricing with two $50 payments and no surprise package tiers.",
       },
     ],
   }),
   component: PricingPage,
 });
 
-const packages = [
-  {
-    title: "Starter Website",
-    subtitle: "Best for new local businesses",
-    price: "$150",
-    features: [
-      "One clean landing page with mobile-first design",
-      "Fast load speed, professional layout, contact CTA",
-      "Essential local SEO structure and lead capture",
-    ],
-  },
-  {
-    title: "Growth Website",
-    subtitle: "Great for businesses ready to expand",
-    price: "$350",
-    features: [
-      "Up to 5 responsive pages",
-      "Built-in contact form and appointment info",
-      "SEO-friendly sections for local search",
-    ],
-  },
-  {
-    title: "Launch Website",
-    subtitle: "For brands that want a polished online presence",
-    price: "$450",
-    features: [
-      "Homepage, services, portfolio, and contact",
-      "Speed optimization and user-friendly copy structure",
-      "Support to launch and connect your email",
-    ],
-  },
-];
+const included = [
+  "A custom, mobile-friendly small-business website",
+  "Up to five essential pages",
+  "Clear calls to action and contact information",
+  "Basic search-engine and performance setup",
+  "Two focused revision rounds",
+  "Help connecting your domain and launching the site",
+] as const;
 
 function PricingPage() {
   return (
     <PageShell>
-      <section className="pt-24 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 hero-glow opacity-40 pointer-events-none" />
+      <section className="relative overflow-hidden border-b-2 border-foreground py-20 md:py-28">
+        <div className="grid-bg pointer-events-none absolute inset-0" />
         <div className="container-page relative">
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-primary mb-4">
-            Pricing
+          <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-primary">
+            Simple pricing
           </p>
-          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight max-w-3xl">
-            Website packages designed to win customers — not waste your budget.
+          <h1 className="max-w-5xl font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl">
+            One website. <span className="text-gradient">$100 total.</span>
           </h1>
-          <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            Packages start at $150. These prices are an aggressive entry offer, and the final project cost is confirmed in a free call so you get exactly what you need.
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            No confusing tiers and no four-figure quote. Pay $50 to begin. Pay
+            the remaining $50 only after you review and approve the finished
+            website.
           </p>
         </div>
       </section>
 
-      <section className="pb-32">
-        <div className="container-page grid gap-6 md:grid-cols-3">
-          {packages.map((item) => (
-            <div key={item.title} className="rounded-3xl border border-border bg-surface p-8 shadow-lg shadow-slate-900/5">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-xs font-bold tracking-[0.18em] uppercase text-primary mb-2">
-                    {item.subtitle}
-                  </p>
-                  <h2 className="font-display text-3xl font-bold tracking-tight">
-                    {item.title}
-                  </h2>
-                </div>
-                <p className="text-3xl font-bold text-foreground">{item.price}</p>
+      <section className="theme-light border-b-2 border-foreground bg-background py-20 md:py-24">
+        <div className="container-page grid gap-8 lg:grid-cols-12">
+          <article className="border-2 border-foreground bg-background p-7 md:p-10 lg:col-span-7">
+            <div className="flex flex-col justify-between gap-6 border-b-2 border-foreground pb-8 sm:flex-row sm:items-end">
+              <div>
+                <p className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                  Flat-rate website
+                </p>
+                <h2 className="font-display text-3xl font-bold md:text-5xl">
+                  Small-business website
+                </h2>
               </div>
-              <div className="mt-8 space-y-4 text-sm text-muted-foreground leading-relaxed">
-                {item.features.map((feature) => (
-                  <div key={feature} className="flex items-start gap-3">
-                    <span className="mt-1 text-primary">•</span>
-                    <p>{feature}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-10">
-                <a
-                  href="mailto:hello@emmanuelwebsolutions.me"
-                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  Email to book a call
-                </a>
-              </div>
+              <p className="font-display text-6xl font-bold text-primary">
+                $100
+              </p>
             </div>
-          ))}
+
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+              {included.map((feature) => (
+                <li
+                  key={feature}
+                  className="flex items-start gap-3 text-sm leading-relaxed"
+                >
+                  <span
+                    className="mt-1 font-mono font-bold text-primary"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to="/contact"
+              className="mt-10 inline-flex border-2 border-foreground bg-foreground px-7 py-4 font-mono text-sm font-bold uppercase tracking-[0.12em] text-background transition-colors hover:border-primary hover:bg-primary"
+            >
+              Start your website
+            </Link>
+          </article>
+
+          <aside className="border-2 border-foreground bg-foreground p-7 text-background md:p-10 lg:col-span-5">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#ff6b6b]">
+              Payment schedule
+            </p>
+            <ol className="mt-8 space-y-8">
+              <li className="border-b-2 border-background/30 pb-8">
+                <p className="font-display text-5xl font-bold">$50</p>
+                <h3 className="mt-3 text-xl font-bold">To begin</h3>
+                <p className="mt-2 text-sm leading-relaxed text-background/70">
+                  This reserves your project and starts the design and build.
+                </p>
+              </li>
+              <li>
+                <p className="font-display text-5xl font-bold text-primary">
+                  $50
+                </p>
+                <h3 className="mt-3 text-xl font-bold">After approval</h3>
+                <p className="mt-2 text-sm leading-relaxed text-background/70">
+                  You review the finished website first. The final payment is
+                  due before launch or file transfer.
+                </p>
+              </li>
+            </ol>
+          </aside>
         </div>
       </section>
 
-      <section className="pb-32">
-        <div className="container-page rounded-[2rem] border border-border bg-background p-10 md:p-14">
-          <div className="max-w-3xl">
-            <p className="text-xs font-bold tracking-[0.18em] uppercase text-muted-foreground mb-4">
-              Need help choosing?
+      <section className="py-20 md:py-24">
+        <div className="container-page grid gap-10 md:grid-cols-2">
+          <div>
+            <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-primary">
+              Clear scope
             </p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight">
-              Final pricing is always agreed by call.
+            <h2 className="font-display text-3xl font-bold md:text-5xl">
+              The price stays simple.
             </h2>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Every business is unique. These package prices show the typical starting value, and then we tailor the final scope during a quick discovery call.
+          </div>
+          <div className="space-y-5 text-base leading-relaxed text-muted-foreground">
+            <p>
+              The $100 offer covers a standard informational website for a small
+              business. I confirm the pages and features with you before work
+              begins.
             </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center rounded-full border border-border bg-background px-8 py-3 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary"
-              >
-                Start the inquiry
-              </Link>
-              <a
-                href="mailto:hello@emmanuelwebsolutions.me"
-                className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
-              >
-                Email hello@emmanuelwebsolutions.me
-              </a>
-            </div>
+            <p>
+              Domain names, hosting plans, paid booking tools, online stores,
+              and other third-party subscriptions are not included. I will
+              explain any outside cost before you agree to it.
+            </p>
+            <a
+              href="mailto:hello@emmanuelwebsolutions.me?subject=My%20%24100%20website"
+              className="inline-block font-mono text-sm font-bold uppercase tracking-[0.1em] text-primary underline underline-offset-4"
+            >
+              Email me about your website →
+            </a>
           </div>
         </div>
       </section>

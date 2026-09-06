@@ -64,6 +64,13 @@ const actions: {
     internal: true,
   },
   {
+    label: "LinkedIn",
+    value: "Add profile URL",
+    href: "https://www.linkedin.com/",
+    icon: Globe,
+    external: true,
+  },
+  {
     label: "My Website",
     value: "emmanuelwebsolutions.me",
     href: "https://emmanuelwebsolutions.me",
@@ -121,7 +128,7 @@ function CardPage() {
                   <span>
                     Need a website?
                     <span className="block text-background/70 font-medium text-sm">
-                      Starting at $100
+                      $100 total · $50 now, $50 after approval
                     </span>
                   </span>
                   <ArrowUpRight className="size-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
