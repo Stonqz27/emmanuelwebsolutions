@@ -96,7 +96,7 @@ function PricingPage() {
           </article>
 
           <aside className="border-2 border-foreground bg-foreground p-7 text-background md:p-10 lg:col-span-5">
-            <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#ff6b6b]">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-primary">
               Payment schedule
             </p>
             <ol className="mt-8 space-y-8">
