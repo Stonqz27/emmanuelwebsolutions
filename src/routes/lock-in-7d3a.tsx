@@ -481,9 +481,30 @@ function LockInRoute() {
         ? (JSON.parse(stored) as EncryptedEnvelope)
         : INITIAL_ENVELOPE;
       const result = await decryptEnvelope(passphrase.trim(), envelope);
+      const unlocked = result.data;
+      const migrated =
+        unlocked.version >= 2
+          ? unlocked
+          : {
+              ...unlocked,
+              version: 2,
+              commitments: {
+                ...unlocked.commitments,
+                cleaningTime: unlocked.commitments.cleaningTime.startsWith(
+                  "Set",
+                )
+                  ? "9:00 AM–12:00 PM"
+                  : unlocked.commitments.cleaningTime,
+                sundayChurchTime:
+                  unlocked.commitments.sundayChurchTime.startsWith("Set")
+                    ? "10:00 AM"
+                    : unlocked.commitments.sundayChurchTime,
+                hollyMowPlan: "Sunday 1:30–2:30 PM",
+              },
+            };
       keyRef.current = result.key;
       saltRef.current = envelope.salt;
-      setData(result.data);
+      setData(migrated);
       setPassphrase("");
       setSaveState("Saved");
     } catch {
