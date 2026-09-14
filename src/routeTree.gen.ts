@@ -16,6 +16,7 @@ import { Route as SecurityRouteImport } from './routes/security'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as LockIn7d3aRouteImport } from './routes/lock-in-7d3a'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CardRouteImport } from './routes/card'
 import { Route as AboutRouteImport } from './routes/about'
@@ -66,6 +67,11 @@ const PricingRoute = PricingRouteImport.update({
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LockIn7d3aRoute = LockIn7d3aRouteImport.update({
+  id: '/lock-in-7d3a',
+  path: '/lock-in-7d3a',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/card': typeof CardRoute
   '/contact': typeof ContactRoute
+  '/lock-in-7d3a': typeof LockIn7d3aRoute
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/card': typeof CardRoute
   '/contact': typeof ContactRoute
+  '/lock-in-7d3a': typeof LockIn7d3aRoute
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/card': typeof CardRoute
   '/contact': typeof ContactRoute
+  '/lock-in-7d3a': typeof LockIn7d3aRoute
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -232,6 +241,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/card'
     | '/contact'
+    | '/lock-in-7d3a'
     | '/portfolio'
     | '/pricing'
     | '/privacy'
@@ -257,6 +267,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/card'
     | '/contact'
+    | '/lock-in-7d3a'
     | '/portfolio'
     | '/pricing'
     | '/privacy'
@@ -282,6 +293,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/card'
     | '/contact'
+    | '/lock-in-7d3a'
     | '/portfolio'
     | '/pricing'
     | '/privacy'
@@ -308,6 +320,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CardRoute: typeof CardRoute
   ContactRoute: typeof ContactRoute
+  LockIn7d3aRoute: typeof LockIn7d3aRoute
   PortfolioRoute: typeof PortfolioRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -377,6 +390,13 @@ declare module '@tanstack/react-router' {
       path: '/portfolio'
       fullPath: '/portfolio'
       preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lock-in-7d3a': {
+      id: '/lock-in-7d3a'
+      path: '/lock-in-7d3a'
+      fullPath: '/lock-in-7d3a'
+      preLoaderRoute: typeof LockIn7d3aRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -511,6 +531,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CardRoute: CardRoute,
   ContactRoute: ContactRoute,
+  LockIn7d3aRoute: LockIn7d3aRoute,
   PortfolioRoute: PortfolioRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,

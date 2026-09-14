@@ -1,0 +1,18 @@
+{
+  "name": "Emmanuel Lock In",
+  "short_name": "Lock In",
+  "description": "Private daily fitness, class, work, and money planner.",
+  "start_url": "/lock-in-7d3a",
+  "scope": "/lock-in-7d3a",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#ff1493",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
