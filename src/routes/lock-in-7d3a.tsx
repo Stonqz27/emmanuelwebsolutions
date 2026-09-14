@@ -1,26 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  CalendarDays,
+  BookOpen,
+  BriefcaseBusiness,
   Check,
+  Clock3,
   Dumbbell,
   Footprints,
   LockKeyhole,
   LogOut,
   Moon,
-  Plus,
-  Scale,
-  Settings,
   ShieldCheck,
-  Trash2,
   Utensils,
-  Wallet,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const STORAGE_KEY = "emmanuel-lock-in:v1";
 const DAY_NAMES = [
@@ -33,20 +28,8 @@ const DAY_NAMES = [
   "Saturday",
 ] as const;
 
-const INITIAL_ENVELOPE: EncryptedEnvelope = {
-  v: 1,
-  salt: "QQ27Im/mLF10wbqa/G+PmA==",
-  iv: "Fma/BezXKfWbYU9W",
-  ciphertext:
-    "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",
-};
-
 type DayName = (typeof DAY_NAMES)[number];
 type ClassItem = { time: string; title: string; place: string };
-type TrainingItem = { time: string; title: string; detail: string };
-type MealItem = { time: string; name: string; detail: string };
-type WeightEntry = { date: string; value: number };
-type EarningEntry = { id: string; date: string; label: string; amount: number };
 type EncryptedEnvelope = {
   v: number;
   salt: string;
@@ -65,8 +48,6 @@ type PlannerData = {
     wakeTime: string;
   };
   classSchedule: Record<DayName, ClassItem[]>;
-  training: Record<DayName, TrainingItem>;
-  meals: MealItem[];
   commitments: {
     cleaningAnchor: string;
     cleaningPlace: string;
@@ -79,15 +60,41 @@ type PlannerData = {
     hollyPay: number;
   };
   completions: Record<string, boolean>;
-  weights: WeightEntry[];
-  earnings: EarningEntry[];
+  [key: string]: unknown;
 };
+type PlanKind = "class" | "food" | "gym" | "walk" | "work" | "sleep";
+type PlanItem = {
+  id: string;
+  start: number;
+  end: number;
+  time: string;
+  title: string;
+  detail: string;
+  kind: PlanKind;
+};
+
+const INITIAL_ENVELOPE: EncryptedEnvelope = {
+  v: 1,
+  salt: "06SSguTSDE7PVawFR/Mtzw==",
+  iv: "y3FyasDgbfkkrvoW",
+  ciphertext:
+    "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",
+};
+
+const FOOD = {
+  breakfast: "3 eggs + 1 bowl oatmeal + 1 banana. Drink water.",
+  main: "One plate: 2 palms lean protein, 1 fist rice or potatoes, 2 fists vegetables, plus fruit. Water only.",
+  snack:
+    "Greek yogurt + one piece of fruit. If unavailable: protein shake + banana.",
+};
+const GYM_WORKOUT =
+  "5-minute treadmill warm-up. Then leg press, chest press, lat pulldown, seated row, and leg curl — 3 sets of 10 each. Plank 3 × 30 seconds. Finish with a 10-minute incline walk.";
 
 export const Route = createFileRoute("/lock-in-7d3a")({
   head: () => ({
     meta: [
-      { title: "Lock In" },
-      { name: "description", content: "Private personal planner." },
+      { title: "Do This Today" },
+      { name: "description", content: "Emmanuel's fixed daily plan." },
       { name: "robots", content: "noindex, nofollow, noarchive" },
       { name: "theme-color", content: "#ff1493" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
@@ -95,7 +102,7 @@ export const Route = createFileRoute("/lock-in-7d3a")({
         name: "apple-mobile-web-app-status-bar-style",
         content: "black-translucent",
       },
-      { name: "apple-mobile-web-app-title", content: "Lock In" },
+      { name: "apple-mobile-web-app-title", content: "Do This" },
     ],
     links: [
       { rel: "manifest", href: "/lock-in.webmanifest" },
@@ -108,7 +115,6 @@ export const Route = createFileRoute("/lock-in-7d3a")({
 function bytesFromBase64(value: string) {
   return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
 }
-
 function base64FromBytes(value: ArrayBuffer | Uint8Array) {
   const bytes = value instanceof Uint8Array ? value : new Uint8Array(value);
   let binary = "";
@@ -117,7 +123,6 @@ function base64FromBytes(value: ArrayBuffer | Uint8Array) {
   });
   return btoa(binary);
 }
-
 async function deriveKey(passphrase: string, salt: Uint8Array) {
   const material = await crypto.subtle.importKey(
     "raw",
@@ -134,7 +139,6 @@ async function deriveKey(passphrase: string, salt: Uint8Array) {
     ["encrypt", "decrypt"],
   );
 }
-
 async function decryptEnvelope(
   passphrase: string,
   envelope: EncryptedEnvelope,
@@ -151,12 +155,7 @@ async function decryptEnvelope(
     data: JSON.parse(new TextDecoder().decode(plaintext)) as PlannerData,
   };
 }
-
-async function encryptData(
-  data: PlannerData,
-  key: CryptoKey,
-  salt: string,
-): Promise<EncryptedEnvelope> {
+async function encryptData(data: PlannerData, key: CryptoKey, salt: string) {
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const ciphertext = await crypto.subtle.encrypt(
     { name: "AES-GCM", iv },
@@ -168,21 +167,18 @@ async function encryptData(
     salt,
     iv: base64FromBytes(iv),
     ciphertext: base64FromBytes(ciphertext),
-  };
+  } satisfies EncryptedEnvelope;
 }
-
 function localDateKey(date = new Date()) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
-
 function parseLocalDate(value: string) {
   const [year, month, day] = value.split("-").map(Number);
   return new Date(year, month - 1, day);
 }
-
 function isCleaningSaturday(date: Date, anchor: string) {
   if (date.getDay() !== 6) return false;
   const days = Math.round(
@@ -192,13 +188,262 @@ function isCleaningSaturday(date: Date, anchor: string) {
   );
   return days >= 0 && days % 14 === 0;
 }
+function classRange(value: string) {
+  const match = value.match(
+    /(\d+):(\d+)\s*(AM|PM)?\s*[–-]\s*(\d+):(\d+)\s*(AM|PM)/i,
+  );
+  if (!match) return { start: 0, end: 0 };
+  const period = match[3] || match[6];
+  return {
+    start: toMinutes(Number(match[1]), Number(match[2]), period),
+    end: toMinutes(Number(match[4]), Number(match[5]), match[6]),
+  };
+}
+function toMinutes(hour: number, minute: number, period: string) {
+  return ((hour % 12) + (period.toUpperCase() === "PM" ? 12 : 0)) * 60 + minute;
+}
+function iconFor(kind: PlanKind) {
+  const props = { className: "size-5", "aria-hidden": true } as const;
+  if (kind === "food") return <Utensils {...props} />;
+  if (kind === "gym") return <Dumbbell {...props} />;
+  if (kind === "walk") return <Footprints {...props} />;
+  if (kind === "class") return <BookOpen {...props} />;
+  if (kind === "work") return <BriefcaseBusiness {...props} />;
+  return <Moon {...props} />;
+}
 
-function money(value: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(value);
+function buildPlan(date: Date, data: PlannerData): PlanItem[] {
+  const day = DAY_NAMES[date.getDay()];
+  const items: PlanItem[] = [];
+  const add = (item: PlanItem) => items.push(item);
+  const weekday = date.getDay() >= 1 && date.getDay() <= 5;
+  const cleaningSaturday = isCleaningSaturday(
+    date,
+    data.commitments.cleaningAnchor,
+  );
+  add({
+    id: "wake",
+    start: weekday ? 495 : cleaningSaturday ? 480 : 540,
+    end: weekday ? 510 : cleaningSaturday ? 495 : 555,
+    time: weekday ? "8:15 AM" : cleaningSaturday ? "8:00 AM" : "9:00 AM",
+    title: "Get up. Water. Get dressed.",
+    detail: "No scrolling in bed.",
+    kind: "sleep",
+  });
+
+  if (weekday) {
+    add({
+      id: "breakfast",
+      start: 510,
+      end: 555,
+      time: "8:30 AM",
+      title: "Breakfast — Thurgood Marshall",
+      detail: FOOD.breakfast,
+      kind: "food",
+    });
+    for (const course of data.classSchedule[day] || []) {
+      const range = classRange(course.time);
+      add({
+        id: `class-${course.title}`,
+        start: range.start,
+        end: range.end,
+        time: course.time,
+        title: course.title,
+        detail: course.place,
+        kind: "class",
+      });
+    }
+    add({
+      id: "lunch",
+      start: 720,
+      end: 780,
+      time: "12:00 PM",
+      title: "Lunch — Thurgood Marshall",
+      detail: FOOD.main,
+      kind: "food",
+    });
+    if (day === "Tuesday" || day === "Thursday") {
+      add({
+        id: "finance",
+        start: 840,
+        end: 900,
+        time: "2:00–3:00 PM",
+        title: "FIN 101 online work",
+        detail: "Open Canvas and finish the next listed item.",
+        kind: "class",
+      });
+      add({
+        id: "walk",
+        start: 930,
+        end: 960,
+        time: "3:30–4:00 PM",
+        title: "Brisk campus walk",
+        detail: "Walk fast enough that you can talk, but not sing.",
+        kind: "walk",
+      });
+      add({
+        id: "snack",
+        start: 975,
+        end: 1005,
+        time: "4:15 PM",
+        title: "Snack",
+        detail: FOOD.snack,
+        kind: "food",
+      });
+      const dinnerTime = day === "Tuesday" ? "6:10 PM" : "6:00 PM";
+      add({
+        id: "dinner",
+        start: day === "Tuesday" ? 1090 : 1080,
+        end: 1140,
+        time: dinnerTime,
+        title: "Dinner — Thurgood Marshall",
+        detail: FOOD.main,
+        kind: "food",
+      });
+    } else {
+      add({
+        id: "snack",
+        start: 975,
+        end: 1005,
+        time: "4:15 PM",
+        title: "Snack",
+        detail: FOOD.snack,
+        kind: "food",
+      });
+      add({
+        id: "gym",
+        start: 1085,
+        end: 1145,
+        time: "6:05–7:05 PM",
+        title: "Hurt Gym — full body",
+        detail: GYM_WORKOUT,
+        kind: "gym",
+      });
+      add({
+        id: "dinner",
+        start: 1155,
+        end: 1200,
+        time: "7:15 PM",
+        title: "Dinner — Thurgood Marshall",
+        detail: FOOD.main,
+        kind: "food",
+      });
+    }
+  } else if (day === "Saturday") {
+    if (cleaningSaturday) {
+      add({
+        id: "quick-breakfast",
+        start: 495,
+        end: 525,
+        time: "8:15 AM",
+        title: "Quick breakfast",
+        detail: "Greek yogurt + banana + water.",
+        kind: "food",
+      });
+      add({
+        id: "cleaning",
+        start: 540,
+        end: 720,
+        time: data.commitments.cleaningTime,
+        title: data.commitments.cleaningPlace,
+        detail: `${data.commitments.cleaningAddress} · expected $${data.commitments.cleaningPayLow}–$${data.commitments.cleaningPayHigh}`,
+        kind: "work",
+      });
+      add({
+        id: "brunch",
+        start: 750,
+        end: 810,
+        time: "12:30 PM",
+        title: "Brunch — Thurgood Marshall",
+        detail: FOOD.main,
+        kind: "food",
+      });
+    } else {
+      add({
+        id: "brunch",
+        start: 630,
+        end: 690,
+        time: "10:30 AM",
+        title: "Brunch — Thurgood Marshall",
+        detail: `Eggs first, then ${FOOD.main.toLowerCase()}`,
+        kind: "food",
+      });
+      add({
+        id: "walk",
+        start: 720,
+        end: 765,
+        time: "12:00–12:45 PM",
+        title: "Brisk walk",
+        detail: "Outside or treadmill. Keep moving for 45 minutes.",
+        kind: "walk",
+      });
+    }
+    add({
+      id: "dinner",
+      start: 1080,
+      end: 1140,
+      time: "6:00 PM",
+      title: "Dinner — Thurgood Marshall",
+      detail: FOOD.main,
+      kind: "food",
+    });
+  } else {
+    add({
+      id: "church",
+      start: 600,
+      end: 690,
+      time: data.commitments.sundayChurchTime,
+      title: "Church",
+      detail: "Get dressed and leave early enough to be seated on time.",
+      kind: "work",
+    });
+    add({
+      id: "brunch",
+      start: 735,
+      end: 795,
+      time: "12:15 PM",
+      title: "Brunch — Thurgood Marshall",
+      detail: `Eggs first, then ${FOOD.main.toLowerCase()}`,
+      kind: "food",
+    });
+    add({
+      id: "holly",
+      start: 810,
+      end: 870,
+      time: "1:30–2:30 PM",
+      title: "Mow Holly’s lawn",
+      detail: `Do it when confirmed · $${data.commitments.hollyPay}`,
+      kind: "work",
+    });
+    add({
+      id: "reset",
+      start: 960,
+      end: 1020,
+      time: "4:00–5:00 PM",
+      title: "Reset for Monday",
+      detail: "Laundry, bag packed, clothes ready, check Canvas once.",
+      kind: "work",
+    });
+    add({
+      id: "dinner",
+      start: 1080,
+      end: 1140,
+      time: "6:00 PM",
+      title: "Dinner — Thurgood Marshall",
+      detail: FOOD.main,
+      kind: "food",
+    });
+  }
+  add({
+    id: "phone-down",
+    start: 1425,
+    end: 1455,
+    time: "11:45 PM",
+    title: "Phone down",
+    detail: "Shower, set alarm, lights out at 12:15 AM.",
+    kind: "sleep",
+  });
+  return items.sort((a, b) => a.start - b.start);
 }
 
 function LockInRoute() {
@@ -219,7 +464,7 @@ function LockInRoute() {
       if (!keyRef.current) return;
       const envelope = await encryptData(data, keyRef.current, saltRef.current);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(envelope));
-      setSaveState("Saved on this device");
+      setSaveState("Saved");
     }, 350);
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
@@ -240,16 +485,13 @@ function LockInRoute() {
       saltRef.current = envelope.salt;
       setData(result.data);
       setPassphrase("");
-      setSaveState("Saved on this device");
+      setSaveState("Saved");
     } catch {
-      setUnlockError(
-        "That key did not unlock your planner. Check it and try again.",
-      );
+      setUnlockError("Wrong key. Check it and try again.");
     } finally {
       setUnlocking(false);
     }
   }
-
   function lock() {
     keyRef.current = null;
     setData(null);
@@ -258,42 +500,38 @@ function LockInRoute() {
 
   if (!data) {
     return (
-      <main className="min-h-svh bg-background px-5 py-10 text-foreground sm:grid sm:place-items-center">
-        <section className="mx-auto w-full max-w-md border-2 border-foreground bg-surface p-6 sm:p-9">
-          <div className="mb-10 flex items-center justify-between">
-            <div className="grid size-12 place-items-center border-2 border-primary bg-primary text-primary-foreground">
-              <LockKeyhole aria-hidden="true" />
-            </div>
-            <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-              Private
-            </span>
+      <main className="grid min-h-svh place-items-center bg-background px-5 py-10 text-foreground">
+        <section className="w-full max-w-md border-2 border-foreground bg-surface p-6 sm:p-9">
+          <div className="mb-8 grid size-12 place-items-center border-2 border-primary bg-primary text-primary-foreground">
+            <LockKeyhole aria-hidden="true" />
           </div>
-          <h1 className="font-display text-5xl font-bold leading-[0.88]">
-            Lock in.
+          <h1 className="font-display text-5xl font-bold leading-[0.9]">
+            Your day.
             <br />
-            Stay ready.
+            No guessing.
           </h1>
           <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-            Your routine and records are encrypted. Enter your private key to
-            open them.
+            Open the plan. Do the first unfinished thing.
           </p>
           <form onSubmit={unlock} className="mt-8 space-y-4">
-            <label className="block font-mono text-sm font-semibold uppercase tracking-wider">
+            <label
+              className="block font-mono text-sm font-semibold uppercase tracking-wider"
+              htmlFor="lock-in-private-key"
+            >
               Private key
-              <Input
-                id="lock-in-private-key"
-                name="private-key"
-                autoFocus
-                autoCapitalize="none"
-                autoCorrect="off"
-                autoComplete="current-password"
-                className="mt-2"
-                onChange={(event) => setPassphrase(event.target.value)}
-                placeholder="Paste your saved key"
-                type="password"
-                value={passphrase}
-              />
             </label>
+            <Input
+              id="lock-in-private-key"
+              name="private-key"
+              autoFocus
+              autoCapitalize="none"
+              autoCorrect="off"
+              autoComplete="current-password"
+              onChange={(event) => setPassphrase(event.target.value)}
+              placeholder="Paste your saved key"
+              type="password"
+              value={passphrase}
+            />
             {unlockError ? (
               <p role="alert" className="text-sm font-medium text-primary">
                 {unlockError}
@@ -304,28 +542,31 @@ function LockInRoute() {
               disabled={!passphrase || unlocking}
               size="lg"
             >
-              {unlocking ? "Unlocking…" : "Open planner"}
+              {unlocking ? "Opening…" : "SHOW ME WHAT TO DO"}
             </Button>
           </form>
-          <div className="mt-8 flex gap-3 border-t-2 border-border pt-5 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-6 flex gap-3 border-t-2 border-border pt-5 text-sm text-muted-foreground">
             <ShieldCheck
-              className="mt-0.5 size-5 shrink-0 text-primary"
+              className="size-5 shrink-0 text-primary"
               aria-hidden="true"
             />
-            The key is never stored. Save it in Apple Passwords so you do not
-            lose access.
-          </div>
+            Your plan stays encrypted on this device.
+          </p>
         </section>
       </main>
     );
   }
-
   return (
-    <Planner data={data} lock={lock} saveState={saveState} setData={setData} />
+    <DailyPlan
+      data={data}
+      lock={lock}
+      saveState={saveState}
+      setData={setData}
+    />
   );
 }
 
-function Planner({
+function DailyPlan({
   data,
   lock,
   saveState,
@@ -336,782 +577,185 @@ function Planner({
   saveState: string;
   setData: React.Dispatch<React.SetStateAction<PlannerData | null>>;
 }) {
-  const today = new Date();
-  const todayKey = localDateKey(today);
-  const dayName = DAY_NAMES[today.getDay()];
-  const [weight, setWeight] = useState("");
-  const [earningAmount, setEarningAmount] = useState("");
-  const [earningLabel, setEarningLabel] = useState("Church cleaning");
-  const latestWeight = data.weights.at(-1)?.value ?? data.profile.startWeight;
-  const poundsLost = Math.max(0, data.profile.startWeight - latestWeight);
-  const goalDistance = Math.max(
-    1,
-    data.profile.startWeight - data.profile.goalWeight,
-  );
-  const progress = Math.min(100, (poundsLost / goalDistance) * 100);
-  const classes = data.classSchedule[dayName];
-  const cleaningToday = isCleaningSaturday(
-    today,
-    data.commitments.cleaningAnchor,
-  );
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+  const dateKey = localDateKey(now);
+  const plan = buildPlan(now, data);
+  const minutes = now.getHours() * 60 + now.getMinutes();
+  const isDone = (id: string) => Boolean(data.completions[`${dateKey}:${id}`]);
+  const unfinished = plan.filter((item) => !isDone(item.id));
+  const current =
+    unfinished.find((item) => item.end > minutes) || unfinished[0];
+  const sleeping = minutes < 450;
+  const completed = plan.length - unfinished.length;
 
-  const tasks = useMemo(() => {
-    const daily = [
-      {
-        id: "weigh",
-        title: "Morning weigh-in",
-        detail: "After bathroom, before food.",
-      },
-      {
-        id: "protein",
-        title: `${data.profile.proteinGoal} g protein`,
-        detail: "Split it across three meals and one snack.",
-      },
-      {
-        id: "steps",
-        title: `${data.profile.stepsGoal.toLocaleString()} steps`,
-        detail: "Campus walking counts.",
-      },
-      {
-        id: "water",
-        title: "Water with every meal",
-        detail: "Skip liquid calories today.",
-      },
-      {
-        id: "sleep",
-        title: `Lights out ${data.profile.bedtime}`,
-        detail: `Wake at ${data.profile.wakeTime}.`,
-      },
-    ];
-    const scheduled = classes.map((item, index) => ({
-      id: `class-${index}`,
-      title: `${item.time} · ${item.title}`,
-      detail: item.place,
-    }));
-    const workout = {
-      id: "training",
-      title: data.training[dayName].title,
-      detail: `${data.training[dayName].time} · ${data.training[dayName].detail}`,
-    };
-    const commitments: { id: string; title: string; detail: string }[] = [];
-    if (cleaningToday) {
-      commitments.push({
-        id: "church-cleaning",
-        title: data.commitments.cleaningPlace,
-        detail: `${data.commitments.cleaningTime} · ${data.commitments.cleaningAddress} · expected ${money(data.commitments.cleaningPayLow)}–${money(data.commitments.cleaningPayHigh)}`,
-      });
-    }
-    if (dayName === "Sunday") {
-      commitments.push(
-        {
-          id: "sunday-church",
-          title: "Sunday church",
-          detail: data.commitments.sundayChurchTime,
-        },
-        {
-          id: "holly-lawn",
-          title: "Check whether Holly needs the lawn mowed",
-          detail: `${data.commitments.hollyMowPlan} · ${money(data.commitments.hollyPay)}`,
-        },
-      );
-    }
-    return [...scheduled, ...commitments, workout, ...daily];
-  }, [classes, cleaningToday, data, dayName]);
-
-  const completedCount = tasks.filter(
-    (task) => data.completions[`${todayKey}:${task.id}`],
-  ).length;
-  const dayProgress = tasks.length ? (completedCount / tasks.length) * 100 : 0;
-  const totalEarnings = data.earnings.reduce(
-    (sum, item) => sum + item.amount,
-    0,
-  );
-
-  function mutate(mutator: (current: PlannerData) => PlannerData) {
-    setData((current) => (current ? mutator(current) : current));
-  }
-
-  function toggleTask(id: string) {
-    const key = `${todayKey}:${id}`;
-    mutate((current) => ({
-      ...current,
-      completions: {
-        ...current.completions,
-        [key]: !current.completions[key],
-      },
-    }));
-  }
-
-  function addWeight(event: React.FormEvent) {
-    event.preventDefault();
-    const value = Number(weight);
-    if (!Number.isFinite(value) || value < 80 || value > 500) return;
-    mutate((current) => ({
-      ...current,
-      weights: [
-        ...current.weights.filter((entry) => entry.date !== todayKey),
-        { date: todayKey, value },
-      ].sort((a, b) => a.date.localeCompare(b.date)),
-    }));
-    setWeight("");
-  }
-
-  function addEarning(event: React.FormEvent) {
-    event.preventDefault();
-    const amount = Number(earningAmount);
-    if (!earningLabel.trim() || !Number.isFinite(amount) || amount <= 0) return;
-    mutate((current) => ({
-      ...current,
-      earnings: [
-        ...current.earnings,
-        {
-          id: crypto.randomUUID(),
-          date: todayKey,
-          label: earningLabel.trim(),
-          amount,
-        },
-      ],
-    }));
-    setEarningAmount("");
+  function toggle(id: string) {
+    const key = `${dateKey}:${id}`;
+    setData((currentData) =>
+      currentData
+        ? {
+            ...currentData,
+            completions: {
+              ...currentData.completions,
+              [key]: !currentData.completions[key],
+            },
+          }
+        : currentData,
+    );
   }
 
   return (
-    <main className="min-h-svh bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b-2 border-foreground bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+    <main className="min-h-svh bg-background px-4 py-5 text-foreground sm:px-6 sm:py-8">
+      <div className="mx-auto max-w-3xl">
+        <header className="flex items-start justify-between gap-4">
           <div>
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-              {dayName}
+            <p className="font-mono text-sm font-semibold uppercase tracking-[0.16em] text-primary">
+              {now.toLocaleDateString("en-US", { weekday: "long" })}
             </p>
-            <h1 className="font-display text-xl font-bold uppercase">
-              Lock In
+            <h1 className="mt-1 font-display text-4xl font-bold sm:text-5xl">
+              DO THIS TODAY
             </h1>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="hidden text-xs text-muted-foreground sm:inline">
-              {saveState}
-            </span>
-            <Button
-              aria-label="Lock planner"
-              onClick={lock}
-              size="icon"
-              variant="outline"
-            >
-              <LogOut aria-hidden="true" />
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-9">
-        <section className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
-          <div className="border-2 border-foreground bg-surface p-5 sm:p-7">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                  Today’s score
-                </p>
-                <p className="mt-2 font-display text-5xl font-bold">
-                  {completedCount}
-                  <span className="text-muted-foreground">/{tasks.length}</span>
-                </p>
-              </div>
-              <p className="max-w-40 text-right text-sm text-muted-foreground">
-                Finish the next action. Don’t negotiate with the whole day.
-              </p>
-            </div>
-            <Progress className="mt-5 h-3 rounded-none" value={dayProgress} />
-          </div>
-          <div className="border-2 border-primary bg-primary p-5 text-primary-foreground sm:p-7">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em]">
-              Current weight
+            <p className="mt-2 text-sm text-muted-foreground">
+              {completed}/{plan.length} done · {saveState}
             </p>
-            <div className="mt-2 flex items-end gap-2">
-              <span className="font-display text-5xl font-bold">
-                {latestWeight}
-              </span>
-              <span className="pb-1 font-mono text-sm">LB</span>
+          </div>
+          <Button
+            aria-label="Lock plan"
+            onClick={lock}
+            size="icon"
+            variant="outline"
+          >
+            <LogOut aria-hidden="true" />
+          </Button>
+        </header>
+
+        <section className="mt-6 border-2 border-primary bg-primary p-5 text-primary-foreground sm:p-7">
+          <div className="flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-wider">
+            <Clock3 className="size-5" aria-hidden="true" />
+            {sleeping || (current && current.start <= minutes)
+              ? "RIGHT NOW"
+              : "NEXT"}
+          </div>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
+            {sleeping
+              ? "Sleep. Alarm at 8:15 AM."
+              : current?.title || "You finished today."}
+          </h2>
+          <p className="mt-3 text-base leading-relaxed">
+            {sleeping
+              ? "Put the phone down. Sleep is part of losing weight."
+              : current
+                ? `${current.time} · ${current.detail}`
+                : "Keep dinner light, drink water, and get to bed on time."}
+          </p>
+          {!sleeping && current ? (
+            <Button
+              className="mt-5 w-full border-2 border-primary-foreground bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              onClick={() => toggle(current.id)}
+            >
+              <Check aria-hidden="true" />
+              MARK DONE
+            </Button>
+          ) : null}
+        </section>
+
+        <section className="mt-6 border-2 border-foreground bg-surface">
+          <div className="border-b-2 border-foreground p-4">
+            <h2 className="font-display text-2xl font-bold">TODAY’S ORDER</h2>
+          </div>
+          <div className="divide-y-2 divide-border">
+            {plan.map((item) => {
+              const done = isDone(item.id);
+              return (
+                <label
+                  key={item.id}
+                  className={`flex cursor-pointer gap-4 p-4 sm:p-5 ${done ? "bg-surface-2 text-muted-foreground" : ""}`}
+                >
+                  <Checkbox
+                    id={`plan-${item.id}`}
+                    name={`plan-${item.id}`}
+                    checked={done}
+                    onCheckedChange={() => toggle(item.id)}
+                    className="mt-1 size-6 shrink-0 rounded-none"
+                  />
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center gap-2 text-sm font-bold text-primary">
+                      {iconFor(item.kind)}
+                      {item.time}
+                    </span>
+                    <span
+                      className={`mt-1 block text-lg font-bold ${done ? "line-through" : ""}`}
+                    >
+                      {item.title}
+                    </span>
+                    <span className="mt-1 block text-base leading-relaxed">
+                      {item.detail}
+                    </span>
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="border-2 border-foreground bg-surface p-5">
+            <div className="flex items-center gap-2 text-primary">
+              <Utensils aria-hidden="true" />
+              <h2 className="font-display text-xl font-bold">
+                DINING-HALL RULE
+              </h2>
             </div>
-            <p className="mt-3 text-sm font-medium">
-              {poundsLost.toFixed(1)} lb down · goal {data.profile.goalWeight}{" "}
-              lb
+            <p className="mt-3 text-base leading-relaxed">
+              <strong>One plate.</strong> Protein first, one fist of carbs, two
+              fists of vegetables, fruit. Water or a zero-calorie drink. No
+              second plate.
+            </p>
+          </div>
+          <div className="border-2 border-foreground bg-surface p-5">
+            <div className="flex items-center gap-2 text-primary">
+              <Dumbbell aria-hidden="true" />
+              <h2 className="font-display text-xl font-bold">GYM RULE</h2>
+            </div>
+            <p className="mt-3 text-base leading-relaxed">
+              <strong>Monday, Wednesday, Friday at 6:05 PM.</strong> Do the
+              listed workout. Do not add random exercises. Just finish it.
             </p>
           </div>
         </section>
 
-        <Tabs defaultValue="today" className="mt-6">
-          <TabsList className="grid h-auto w-full grid-cols-5 rounded-none border-2 border-foreground bg-surface p-1">
-            {[
-              ["today", Check, "Today"],
-              ["week", CalendarDays, "Week"],
-              ["food", Utensils, "Food"],
-              ["money", Wallet, "Money"],
-              ["settings", Settings, "Setup"],
-            ].map(([value, Icon, label]) => (
-              <TabsTrigger
-                aria-label={String(label)}
-                key={String(value)}
-                value={String(value)}
-                className="h-12 rounded-none px-1 text-[11px] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground sm:text-sm"
-              >
-                {typeof Icon !== "string" ? (
-                  <Icon className="size-4 sm:mr-2" aria-hidden="true" />
-                ) : null}
-                <span className="hidden sm:inline">{String(label)}</span>
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <section className="mt-4 border-2 border-foreground bg-surface p-5">
+          <h2 className="font-display text-xl font-bold">THE ONLY 5 RULES</h2>
+          <ol className="mt-3 space-y-2 text-base leading-relaxed">
+            <li>
+              1. Follow today’s order. If you miss something, do the next thing.
+            </li>
+            <li>
+              2. Water or zero-calorie drinks. No regular soda, juice, or sweet
+              tea.
+            </li>
+            <li>
+              3. No second dining-hall plate. Protein and vegetables can be
+              bigger.
+            </li>
+            <li>4. Weigh Monday morning after the bathroom, before eating.</li>
+            <li>
+              5. Lights out at 12:15 AM. Repeat this plan for 14 days before
+              changing it.
+            </li>
+          </ol>
+        </section>
 
-          <TabsContent
-            value="today"
-            className="mt-5 grid gap-5 lg:grid-cols-[1.3fr_0.7fr]"
-          >
-            <section className="border-2 border-foreground bg-surface">
-              <div className="border-b-2 border-foreground px-5 py-4">
-                <h2 className="font-display text-2xl font-bold">Today</h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {today.toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </p>
-              </div>
-              <div className="divide-y-2 divide-border">
-                {tasks.map((task) => {
-                  const checked = Boolean(
-                    data.completions[`${todayKey}:${task.id}`],
-                  );
-                  return (
-                    <label
-                      key={task.id}
-                      className="flex cursor-pointer gap-4 p-5 hover:bg-surface-2"
-                    >
-                      <Checkbox
-                        id={`task-${task.id}`}
-                        name={`task-${task.id}`}
-                        checked={checked}
-                        className="mt-0.5 size-6 rounded-none"
-                        onCheckedChange={() => toggleTask(task.id)}
-                      />
-                      <span className="min-w-0">
-                        <span
-                          className={`block text-base font-semibold ${checked ? "text-muted-foreground line-through" : ""}`}
-                        >
-                          {task.title}
-                        </span>
-                        <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                          {task.detail}
-                        </span>
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-            </section>
-
-            <aside className="space-y-5">
-              <section className="border-2 border-foreground bg-surface p-5">
-                <div className="flex items-center gap-3">
-                  <Scale className="text-primary" aria-hidden="true" />
-                  <h2 className="font-display text-xl font-bold">Log weight</h2>
-                </div>
-                <form onSubmit={addWeight} className="mt-4 flex gap-2">
-                  <Input
-                    aria-label="Weight in pounds"
-                    id="weight-log"
-                    inputMode="decimal"
-                    max="500"
-                    min="80"
-                    name="weight"
-                    onChange={(event) => setWeight(event.target.value)}
-                    placeholder={`${latestWeight}`}
-                    step="0.1"
-                    type="number"
-                    value={weight}
-                  />
-                  <Button aria-label="Add weight" size="icon">
-                    <Plus />
-                  </Button>
-                </form>
-                <Progress className="mt-5 h-3 rounded-none" value={progress} />
-                <p className="mt-3 text-sm text-muted-foreground">
-                  Use the weekly average. Normal daily changes are noise.
-                </p>
-              </section>
-
-              <section className="border-2 border-foreground bg-surface p-5">
-                <div className="flex items-center gap-3">
-                  <Moon className="text-primary" aria-hidden="true" />
-                  <h2 className="font-display text-xl font-bold">
-                    Sleep anchor
-                  </h2>
-                </div>
-                <p className="mt-4 text-3xl font-bold">
-                  {data.profile.bedtime}
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Phone down 30 minutes earlier · wake {data.profile.wakeTime}
-                </p>
-              </section>
-
-              <section className="border-2 border-foreground bg-surface p-5">
-                <div className="flex items-center gap-3">
-                  <Footprints className="text-primary" aria-hidden="true" />
-                  <h2 className="font-display text-xl font-bold">
-                    First target
-                  </h2>
-                </div>
-                <p className="mt-4 text-3xl font-bold">195 lb</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Aim for about 1–2 lb per week. No crash diet.
-                </p>
-              </section>
-            </aside>
-          </TabsContent>
-
-          <TabsContent value="week" className="mt-5 space-y-5">
-            <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {DAY_NAMES.slice(1)
-                .concat("Sunday")
-                .map((day) => (
-                  <article
-                    key={day}
-                    className="border-2 border-foreground bg-surface p-5"
-                  >
-                    <h2 className="font-display text-2xl font-bold">{day}</h2>
-                    <div className="mt-4 space-y-4">
-                      {data.classSchedule[day].map((item) => (
-                        <div key={`${item.time}-${item.title}`}>
-                          <p className="font-mono text-xs text-primary">
-                            {item.time}
-                          </p>
-                          <p className="font-semibold">{item.title}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {item.place}
-                          </p>
-                        </div>
-                      ))}
-                      {data.classSchedule[day].length === 0 ? (
-                        <p className="text-sm text-muted-foreground">
-                          No scheduled class.
-                        </p>
-                      ) : null}
-                      <div className="border-t-2 border-border pt-4">
-                        <p className="font-mono text-xs text-primary">
-                          {data.training[day].time}
-                        </p>
-                        <p className="font-semibold">
-                          {data.training[day].title}
-                        </p>
-                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                          {data.training[day].detail}
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-            </section>
-            <section className="border-2 border-primary bg-primary p-5 text-primary-foreground">
-              <p className="font-mono text-xs font-semibold uppercase tracking-wider">
-                FIN 101
-              </p>
-              <p className="mt-2 text-lg font-bold">
-                Online course: reserve Tuesday and Thursday, 2:00–3:00 p.m.
-              </p>
-            </section>
-          </TabsContent>
-
-          <TabsContent
-            value="food"
-            className="mt-5 grid gap-5 lg:grid-cols-[1fr_0.7fr]"
-          >
-            <section className="border-2 border-foreground bg-surface">
-              <div className="border-b-2 border-foreground p-5">
-                <h2 className="font-display text-2xl font-bold">
-                  Daily food script
-                </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Repeatable beats perfect.
-                </p>
-              </div>
-              <div className="divide-y-2 divide-border">
-                {data.meals.map((meal) => (
-                  <article key={meal.name} className="p-5">
-                    <p className="font-mono text-xs font-semibold text-primary">
-                      {meal.time}
-                    </p>
-                    <h3 className="mt-1 text-lg font-bold">{meal.name}</h3>
-                    <p className="mt-2 leading-relaxed text-muted-foreground">
-                      {meal.detail}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </section>
-            <aside className="space-y-5">
-              <section className="border-2 border-foreground bg-surface p-5">
-                <h2 className="font-display text-xl font-bold">
-                  Non-negotiables
-                </h2>
-                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                  <li>• Track everything for the first 14 days.</li>
-                  <li>• Hit {data.profile.proteinGoal} g protein.</li>
-                  <li>• Water or zero-calorie drinks.</li>
-                  <li>• Takeout no more than twice weekly.</li>
-                  <li>• One flexible meal, never a whole cheat day.</li>
-                </ul>
-              </section>
-              <section className="border-2 border-primary bg-primary p-5 text-primary-foreground">
-                <h2 className="font-display text-xl font-bold">
-                  Dining-hall plate
-                </h2>
-                <p className="mt-3 leading-relaxed">
-                  ½ vegetables or fruit
-                  <br />¼ lean protein
-                  <br />¼ rice, potatoes, or pasta
-                </p>
-              </section>
-            </aside>
-          </TabsContent>
-
-          <TabsContent
-            value="money"
-            className="mt-5 grid gap-5 lg:grid-cols-[0.7fr_1.3fr]"
-          >
-            <section className="border-2 border-foreground bg-surface p-5">
-              <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                Logged total
-              </p>
-              <p className="mt-2 font-display text-5xl font-bold text-primary">
-                {money(totalEarnings)}
-              </p>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Church cleaning: every other Saturday (usually twice monthly),
-                expected {money(data.commitments.cleaningPayLow)}–
-                {money(data.commitments.cleaningPayHigh)} each. Holly’s lawn:{" "}
-                {money(data.commitments.hollyPay)} when completed.
-              </p>
-              <form
-                onSubmit={addEarning}
-                className="mt-6 space-y-3 border-t-2 border-border pt-5"
-              >
-                <label className="block text-sm font-semibold">
-                  Job
-                  <Input
-                    className="mt-2"
-                    id="earning-job"
-                    name="earning-job"
-                    onChange={(event) => setEarningLabel(event.target.value)}
-                    value={earningLabel}
-                  />
-                </label>
-                <label className="block text-sm font-semibold">
-                  Amount
-                  <Input
-                    className="mt-2"
-                    id="earning-amount"
-                    inputMode="decimal"
-                    min="1"
-                    name="earning-amount"
-                    onChange={(event) => setEarningAmount(event.target.value)}
-                    placeholder="225"
-                    type="number"
-                    value={earningAmount}
-                  />
-                </label>
-                <Button className="w-full">
-                  <Plus /> Log payment
-                </Button>
-              </form>
-            </section>
-            <section className="border-2 border-foreground bg-surface">
-              <div className="border-b-2 border-foreground p-5">
-                <h2 className="font-display text-2xl font-bold">Payments</h2>
-              </div>
-              {data.earnings.length ? (
-                <div className="divide-y-2 divide-border">
-                  {[...data.earnings].reverse().map((entry) => (
-                    <div
-                      key={entry.id}
-                      className="flex items-center justify-between gap-4 p-5"
-                    >
-                      <div>
-                        <p className="font-semibold">{entry.label}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {entry.date}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="font-bold text-primary">
-                          {money(entry.amount)}
-                        </span>
-                        <Button
-                          aria-label={`Delete ${entry.label} payment`}
-                          onClick={() =>
-                            mutate((current) => ({
-                              ...current,
-                              earnings: current.earnings.filter(
-                                (item) => item.id !== entry.id,
-                              ),
-                            }))
-                          }
-                          size="icon"
-                          variant="ghost"
-                        >
-                          <Trash2 />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="p-5 text-muted-foreground">
-                  No payments logged yet.
-                </p>
-              )}
-            </section>
-          </TabsContent>
-
-          <TabsContent
-            value="settings"
-            className="mt-5 grid gap-5 lg:grid-cols-2"
-          >
-            <SettingsCard title="Fitness targets">
-              <NumberSetting
-                label="Starting weight"
-                value={data.profile.startWeight}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    profile: { ...current.profile, startWeight: value },
-                  }))
-                }
-              />
-              <NumberSetting
-                label="Goal weight"
-                value={data.profile.goalWeight}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    profile: { ...current.profile, goalWeight: value },
-                  }))
-                }
-              />
-              <NumberSetting
-                label="Daily protein (g)"
-                value={data.profile.proteinGoal}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    profile: { ...current.profile, proteinGoal: value },
-                  }))
-                }
-              />
-              <NumberSetting
-                label="Daily steps"
-                value={data.profile.stepsGoal}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    profile: { ...current.profile, stepsGoal: value },
-                  }))
-                }
-              />
-            </SettingsCard>
-            <SettingsCard title="Work and church">
-              <TextSetting
-                label="Next cleaning Saturday (14-day anchor)"
-                type="date"
-                value={data.commitments.cleaningAnchor}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    commitments: {
-                      ...current.commitments,
-                      cleaningAnchor: value,
-                    },
-                  }))
-                }
-              />
-              <TextSetting
-                label="Cleaning start time"
-                value={data.commitments.cleaningTime}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    commitments: {
-                      ...current.commitments,
-                      cleaningTime: value,
-                    },
-                  }))
-                }
-              />
-              <NumberSetting
-                label="Cleaning pay — low estimate"
-                value={data.commitments.cleaningPayLow}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    commitments: {
-                      ...current.commitments,
-                      cleaningPayLow: value,
-                    },
-                  }))
-                }
-              />
-              <NumberSetting
-                label="Cleaning pay — high estimate"
-                value={data.commitments.cleaningPayHigh}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    commitments: {
-                      ...current.commitments,
-                      cleaningPayHigh: value,
-                    },
-                  }))
-                }
-              />
-              <TextSetting
-                label="Sunday church time"
-                value={data.commitments.sundayChurchTime}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    commitments: {
-                      ...current.commitments,
-                      sundayChurchTime: value,
-                    },
-                  }))
-                }
-              />
-              <TextSetting
-                label="Holly lawn plan"
-                value={data.commitments.hollyMowPlan}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    commitments: {
-                      ...current.commitments,
-                      hollyMowPlan: value,
-                    },
-                  }))
-                }
-              />
-              <NumberSetting
-                label="Holly lawn pay"
-                value={data.commitments.hollyPay}
-                onChange={(value) =>
-                  mutate((current) => ({
-                    ...current,
-                    commitments: { ...current.commitments, hollyPay: value },
-                  }))
-                }
-              />
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                Confirm the church-cleaning start time, whether the pay is $200
-                or $250, and your Sunday service time once. The planner will
-                remember them on this device.
-              </p>
-            </SettingsCard>
-            <section className="border-2 border-primary bg-primary p-5 text-primary-foreground lg:col-span-2">
-              <h2 className="font-display text-2xl font-bold">
-                Add to iPhone home screen
-              </h2>
-              <ol className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
-                <li>
-                  <strong>1.</strong> Open this page in Safari.
-                </li>
-                <li>
-                  <strong>2.</strong> Tap Share, then “Add to Home Screen.”
-                </li>
-                <li>
-                  <strong>3.</strong> Name it “Lock In” and tap Add.
-                </li>
-              </ol>
-            </section>
-            <section className="border-2 border-foreground bg-surface p-5 text-sm leading-relaxed text-muted-foreground lg:col-span-2">
-              This is a practical fitness planner, not medical care. Stop and
-              get medical help for chest pain, fainting, severe shortness of
-              breath, or another concerning symptom. Talk with a clinician
-              before aggressive weight loss if you have a medical condition,
-              take medication affecting weight or heart rate, or have a history
-              of disordered eating.
-            </section>
-          </TabsContent>
-        </Tabs>
+        <p className="mx-auto mt-5 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+          Aim for steady progress, not a crash diet. If two Monday weigh-ins
+          pass with no drop, message me and we’ll make one small food
+          adjustment. Stop exercising and seek medical help for chest pain,
+          fainting, or severe shortness of breath.
+        </p>
       </div>
     </main>
-  );
-}
-
-function SettingsCard({
-  children,
-  title,
-}: {
-  children: React.ReactNode;
-  title: string;
-}) {
-  return (
-    <section className="space-y-4 border-2 border-foreground bg-surface p-5">
-      <h2 className="font-display text-2xl font-bold">{title}</h2>
-      {children}
-    </section>
-  );
-}
-
-function NumberSetting({
-  label,
-  onChange,
-  value,
-}: {
-  label: string;
-  onChange: (value: number) => void;
-  value: number;
-}) {
-  const id = useId();
-
-  return (
-    <label className="block text-sm font-semibold" htmlFor={id}>
-      {label}
-      <Input
-        className="mt-2"
-        id={id}
-        min="0"
-        name={label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-        onChange={(event) => onChange(Number(event.target.value))}
-        type="number"
-        value={value}
-      />
-    </label>
-  );
-}
-
-function TextSetting({
-  label,
-  onChange,
-  type = "text",
-  value,
-}: {
-  label: string;
-  onChange: (value: string) => void;
-  type?: string;
-  value: string;
-}) {
-  const id = useId();
-
-  return (
-    <label className="block text-sm font-semibold" htmlFor={id}>
-      {label}
-      <Input
-        className="mt-2"
-        id={id}
-        name={label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-        onChange={(event) => onChange(event.target.value)}
-        type={type}
-        value={value}
-      />
-    </label>
   );
 }

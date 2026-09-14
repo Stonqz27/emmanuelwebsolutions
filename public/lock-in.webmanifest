@@ -1,7 +1,7 @@
 {
-  "name": "Emmanuel Lock In",
-  "short_name": "Lock In",
-  "description": "Private daily fitness, class, work, and money planner.",
+  "name": "Do This Today",
+  "short_name": "Do This",
+  "description": "Emmanuel's fixed class, food, workout, and work schedule.",
   "start_url": "/lock-in-7d3a",
   "scope": "/lock-in-7d3a",
   "display": "standalone",
