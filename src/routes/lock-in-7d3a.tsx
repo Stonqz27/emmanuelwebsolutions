@@ -787,8 +787,8 @@ function Planner({
                 {money(totalEarnings)}
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
-                Church cleaning: two Saturdays monthly, expected{" "}
-                {money(data.commitments.cleaningPayLow)}–
+                Church cleaning: every other Saturday (usually twice monthly),
+                expected {money(data.commitments.cleaningPayLow)}–
                 {money(data.commitments.cleaningPayHigh)} each. Holly’s lawn:{" "}
                 {money(data.commitments.hollyPay)} when completed.
               </p>
@@ -921,7 +921,7 @@ function Planner({
             </SettingsCard>
             <SettingsCard title="Work and church">
               <TextSetting
-                label="Next cleaning Saturday"
+                label="Next cleaning Saturday (14-day anchor)"
                 type="date"
                 value={data.commitments.cleaningAnchor}
                 onChange={(value) =>
