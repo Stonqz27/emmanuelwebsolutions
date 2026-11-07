@@ -15,7 +15,7 @@ const featuredDemos = [
     name: "HallOS / Rawlings",
     category: "Residence hall coordination prototype",
     href: "/rawlings",
-    cover: restaurantCover,
+    cover: null,
   },
   {
     name: "Lush & Luxe",
@@ -204,14 +204,20 @@ function Home() {
                 className={`group ${i === 1 ? "md:mt-24" : ""}`}
               >
                 <div className="aspect-[4/3] overflow-hidden border-2 border-border bg-surface">
-                  <img
-                    src={demo.cover}
-                    alt={`${demo.name} concept website preview`}
-                    width={1200}
-                    height={900}
-                    loading="lazy"
-                    className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
+                  {demo.cover ? (
+                    <img
+                      src={demo.cover}
+                      alt={`${demo.name} concept website preview`}
+                      width={1200}
+                      height={900}
+                      loading="lazy"
+                      className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="flex size-full items-center justify-center bg-[#0e1832] text-center text-white">
+                      <span className="font-display text-5xl font-extrabold tracking-tight md:text-7xl">Hall<span className="text-amber-400">OS</span><span className="block mt-3 text-sm uppercase tracking-[0.25em] text-sky-200">Rawlings Hall</span></span>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-8 flex items-start justify-between">
                   <div>
