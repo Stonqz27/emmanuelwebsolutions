@@ -12,6 +12,12 @@ const featuredDemos = [
     cover: restaurantCover,
   },
   {
+    name: "HallOS / Rawlings",
+    category: "Residence hall coordination prototype",
+    href: "/rawlings",
+    cover: restaurantCover,
+  },
+  {
     name: "Lush & Luxe",
     category: "Salon website concept",
     href: "/demo/salon",
