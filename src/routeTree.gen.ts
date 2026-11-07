@@ -9,79 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ServicesRouteImport } from './routes/services'
-import { Route as SecurityRouteImport } from './routes/security'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as PortfolioRouteImport } from './routes/portfolio'
-import { Route as LockIn7d3aRouteImport } from './routes/lock-in-7d3a'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CardRouteImport } from './routes/card'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CardRouteImport } from './routes/card'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as LockIn7d3aRouteImport } from './routes/lock-in-7d3a'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RawlingsRouteImport } from './routes/rawlings'
+import { Route as SecurityRouteImport } from './routes/security'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as DemoIndexRouteImport } from './routes/demo/index'
-import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
-import { Route as DemoSalonRouteImport } from './routes/demo/salon'
-import { Route as DemoRestaurantRouteImport } from './routes/demo/restaurant'
-import { Route as DemoRealestateRouteImport } from './routes/demo/realestate'
-import { Route as DemoPlumbingRouteImport } from './routes/demo/plumbing'
-import { Route as DemoPhotographyRouteImport } from './routes/demo/photography'
-import { Route as DemoLawyerRouteImport } from './routes/demo/lawyer'
-import { Route as DemoLandscapingRouteImport } from './routes/demo/landscaping'
-import { Route as DemoFitnessRouteImport } from './routes/demo/fitness'
-import { Route as DemoDentalRouteImport } from './routes/demo/dental'
 import { Route as DemoAutorepairRouteImport } from './routes/demo/autorepair'
+import { Route as DemoDentalRouteImport } from './routes/demo/dental'
+import { Route as DemoFitnessRouteImport } from './routes/demo/fitness'
+import { Route as DemoLandscapingRouteImport } from './routes/demo/landscaping'
+import { Route as DemoLawyerRouteImport } from './routes/demo/lawyer'
+import { Route as DemoPhotographyRouteImport } from './routes/demo/photography'
+import { Route as DemoPlumbingRouteImport } from './routes/demo/plumbing'
+import { Route as DemoRealestateRouteImport } from './routes/demo/realestate'
+import { Route as DemoRestaurantRouteImport } from './routes/demo/restaurant'
+import { Route as DemoSalonRouteImport } from './routes/demo/salon'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SecurityRoute = SecurityRouteImport.update({
-  id: '/security',
-  path: '/security',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioRoute = PortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LockIn7d3aRoute = LockIn7d3aRouteImport.update({
-  id: '/lock-in-7d3a',
-  path: '/lock-in-7d3a',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CardRoute = CardRouteImport.update({
-  id: '/card',
-  path: '/card',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -89,9 +45,59 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CardRoute = CardRouteImport.update({
+  id: '/card',
+  path: '/card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LockIn7d3aRoute = LockIn7d3aRouteImport.update({
+  id: '/lock-in-7d3a',
+  path: '/lock-in-7d3a',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RawlingsRoute = RawlingsRouteImport.update({
+  id: '/rawlings',
+  path: '/rawlings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoIndexRoute = DemoIndexRouteImport.update({
@@ -99,49 +105,9 @@ const DemoIndexRoute = DemoIndexRouteImport.update({
   path: '/demo/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesSlugRoute = ServicesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ServicesRoute,
-} as any)
-const DemoSalonRoute = DemoSalonRouteImport.update({
-  id: '/demo/salon',
-  path: '/demo/salon',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoRestaurantRoute = DemoRestaurantRouteImport.update({
-  id: '/demo/restaurant',
-  path: '/demo/restaurant',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoRealestateRoute = DemoRealestateRouteImport.update({
-  id: '/demo/realestate',
-  path: '/demo/realestate',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoPlumbingRoute = DemoPlumbingRouteImport.update({
-  id: '/demo/plumbing',
-  path: '/demo/plumbing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoPhotographyRoute = DemoPhotographyRouteImport.update({
-  id: '/demo/photography',
-  path: '/demo/photography',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoLawyerRoute = DemoLawyerRouteImport.update({
-  id: '/demo/lawyer',
-  path: '/demo/lawyer',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoLandscapingRoute = DemoLandscapingRouteImport.update({
-  id: '/demo/landscaping',
-  path: '/demo/landscaping',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoFitnessRoute = DemoFitnessRouteImport.update({
-  id: '/demo/fitness',
-  path: '/demo/fitness',
+const DemoAutorepairRoute = DemoAutorepairRouteImport.update({
+  id: '/demo/autorepair',
+  path: '/demo/autorepair',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoDentalRoute = DemoDentalRouteImport.update({
@@ -149,10 +115,50 @@ const DemoDentalRoute = DemoDentalRouteImport.update({
   path: '/demo/dental',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoAutorepairRoute = DemoAutorepairRouteImport.update({
-  id: '/demo/autorepair',
-  path: '/demo/autorepair',
+const DemoFitnessRoute = DemoFitnessRouteImport.update({
+  id: '/demo/fitness',
+  path: '/demo/fitness',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DemoLandscapingRoute = DemoLandscapingRouteImport.update({
+  id: '/demo/landscaping',
+  path: '/demo/landscaping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoLawyerRoute = DemoLawyerRouteImport.update({
+  id: '/demo/lawyer',
+  path: '/demo/lawyer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoPhotographyRoute = DemoPhotographyRouteImport.update({
+  id: '/demo/photography',
+  path: '/demo/photography',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoPlumbingRoute = DemoPlumbingRouteImport.update({
+  id: '/demo/plumbing',
+  path: '/demo/plumbing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRealestateRoute = DemoRealestateRouteImport.update({
+  id: '/demo/realestate',
+  path: '/demo/realestate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRestaurantRoute = DemoRestaurantRouteImport.update({
+  id: '/demo/restaurant',
+  path: '/demo/restaurant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoSalonRoute = DemoSalonRouteImport.update({
+  id: '/demo/salon',
+  path: '/demo/salon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ServicesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -164,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/rawlings': typeof RawlingsRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -190,6 +197,7 @@ export interface FileRoutesByTo {
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/rawlings': typeof RawlingsRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -217,6 +225,7 @@ export interface FileRoutesById {
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
+  '/rawlings': typeof RawlingsRoute
   '/security': typeof SecurityRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -245,6 +254,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/pricing'
     | '/privacy'
+    | '/rawlings'
     | '/security'
     | '/services'
     | '/sitemap.xml'
@@ -271,6 +281,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/pricing'
     | '/privacy'
+    | '/rawlings'
     | '/security'
     | '/services'
     | '/sitemap.xml'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/pricing'
     | '/privacy'
+    | '/rawlings'
     | '/security'
     | '/services'
     | '/sitemap.xml'
@@ -324,6 +336,7 @@ export interface RootRouteChildren {
   PortfolioRoute: typeof PortfolioRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
+  RawlingsRoute: typeof RawlingsRoute
   SecurityRoute: typeof SecurityRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -343,74 +356,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/security': {
-      id: '/security'
-      path: '/security'
-      fullPath: '/security'
-      preLoaderRoute: typeof SecurityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio': {
-      id: '/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lock-in-7d3a': {
-      id: '/lock-in-7d3a'
-      path: '/lock-in-7d3a'
-      fullPath: '/lock-in-7d3a'
-      preLoaderRoute: typeof LockIn7d3aRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/card': {
-      id: '/card'
-      path: '/card'
-      fullPath: '/card'
-      preLoaderRoute: typeof CardRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -420,11 +370,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/card': {
+      id: '/card'
+      path: '/card'
+      fullPath: '/card'
+      preLoaderRoute: typeof CardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lock-in-7d3a': {
+      id: '/lock-in-7d3a'
+      path: '/lock-in-7d3a'
+      fullPath: '/lock-in-7d3a'
+      preLoaderRoute: typeof LockIn7d3aRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rawlings': {
+      id: '/rawlings'
+      path: '/rawlings'
+      fullPath: '/rawlings'
+      preLoaderRoute: typeof RawlingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/': {
@@ -434,67 +454,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/$slug': {
-      id: '/services/$slug'
-      path: '/$slug'
-      fullPath: '/services/$slug'
-      preLoaderRoute: typeof ServicesSlugRouteImport
-      parentRoute: typeof ServicesRoute
-    }
-    '/demo/salon': {
-      id: '/demo/salon'
-      path: '/demo/salon'
-      fullPath: '/demo/salon'
-      preLoaderRoute: typeof DemoSalonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/restaurant': {
-      id: '/demo/restaurant'
-      path: '/demo/restaurant'
-      fullPath: '/demo/restaurant'
-      preLoaderRoute: typeof DemoRestaurantRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/realestate': {
-      id: '/demo/realestate'
-      path: '/demo/realestate'
-      fullPath: '/demo/realestate'
-      preLoaderRoute: typeof DemoRealestateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/plumbing': {
-      id: '/demo/plumbing'
-      path: '/demo/plumbing'
-      fullPath: '/demo/plumbing'
-      preLoaderRoute: typeof DemoPlumbingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/photography': {
-      id: '/demo/photography'
-      path: '/demo/photography'
-      fullPath: '/demo/photography'
-      preLoaderRoute: typeof DemoPhotographyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/lawyer': {
-      id: '/demo/lawyer'
-      path: '/demo/lawyer'
-      fullPath: '/demo/lawyer'
-      preLoaderRoute: typeof DemoLawyerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/landscaping': {
-      id: '/demo/landscaping'
-      path: '/demo/landscaping'
-      fullPath: '/demo/landscaping'
-      preLoaderRoute: typeof DemoLandscapingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/fitness': {
-      id: '/demo/fitness'
-      path: '/demo/fitness'
-      fullPath: '/demo/fitness'
-      preLoaderRoute: typeof DemoFitnessRouteImport
+    '/demo/autorepair': {
+      id: '/demo/autorepair'
+      path: '/demo/autorepair'
+      fullPath: '/demo/autorepair'
+      preLoaderRoute: typeof DemoAutorepairRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/dental': {
@@ -504,12 +468,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoDentalRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/autorepair': {
-      id: '/demo/autorepair'
-      path: '/demo/autorepair'
-      fullPath: '/demo/autorepair'
-      preLoaderRoute: typeof DemoAutorepairRouteImport
+    '/demo/fitness': {
+      id: '/demo/fitness'
+      path: '/demo/fitness'
+      fullPath: '/demo/fitness'
+      preLoaderRoute: typeof DemoFitnessRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/demo/landscaping': {
+      id: '/demo/landscaping'
+      path: '/demo/landscaping'
+      fullPath: '/demo/landscaping'
+      preLoaderRoute: typeof DemoLandscapingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/lawyer': {
+      id: '/demo/lawyer'
+      path: '/demo/lawyer'
+      fullPath: '/demo/lawyer'
+      preLoaderRoute: typeof DemoLawyerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/photography': {
+      id: '/demo/photography'
+      path: '/demo/photography'
+      fullPath: '/demo/photography'
+      preLoaderRoute: typeof DemoPhotographyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/plumbing': {
+      id: '/demo/plumbing'
+      path: '/demo/plumbing'
+      fullPath: '/demo/plumbing'
+      preLoaderRoute: typeof DemoPlumbingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/realestate': {
+      id: '/demo/realestate'
+      path: '/demo/realestate'
+      fullPath: '/demo/realestate'
+      preLoaderRoute: typeof DemoRealestateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/restaurant': {
+      id: '/demo/restaurant'
+      path: '/demo/restaurant'
+      fullPath: '/demo/restaurant'
+      preLoaderRoute: typeof DemoRestaurantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/salon': {
+      id: '/demo/salon'
+      path: '/demo/salon'
+      fullPath: '/demo/salon'
+      preLoaderRoute: typeof DemoSalonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof ServicesRoute
     }
   }
 }
@@ -535,6 +555,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortfolioRoute: PortfolioRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
+  RawlingsRoute: RawlingsRoute,
   SecurityRoute: SecurityRoute,
   ServicesRoute: ServicesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

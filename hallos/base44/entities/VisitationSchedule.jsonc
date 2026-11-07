@@ -1,0 +1,91 @@
+{
+  "name": "VisitationSchedule",
+  "type": "object",
+  "properties": {
+    "hall_id": {
+      "type": "string"
+    },
+    "weekday": {
+      "type": "number",
+      "description": "0 = Sunday through 6 = Saturday, America/New_York"
+    },
+    "open_time": {
+      "type": "string",
+      "description": "24-hour HH:MM in Eastern Time. Empty when not posted."
+    },
+    "close_time": {
+      "type": "string",
+      "description": "24-hour HH:MM in Eastern Time. Empty when not posted."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "unconfirmed",
+        "confirmed"
+      ],
+      "description": "Schedules are unconfirmed until hall staff confirm them"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "effective_from": {
+      "type": "string",
+      "description": "Optional first date these hours apply (YYYY-MM-DD, Eastern Time)"
+    },
+    "effective_to": {
+      "type": "string",
+      "description": "Optional last date these hours apply (YYYY-MM-DD, Eastern Time)"
+    },
+    "is_cancelled": {
+      "type": "boolean",
+      "description": "Visitation cancelled for this day"
+    },
+    "is_temporary": {
+      "type": "boolean",
+      "description": "One-off temporary change published by hall staff"
+    },
+    "reminder_minutes": {
+      "type": "number",
+      "description": "Minutes before closing that a reminder would fire. Notifications are not enabled yet."
+    },
+    "updated_by_name": {
+      "type": "string"
+    },
+    "is_demo": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "hall_id",
+    "weekday"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.hall_id": "{{user.data.hall_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

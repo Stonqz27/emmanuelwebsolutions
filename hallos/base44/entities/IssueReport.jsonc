@@ -1,0 +1,100 @@
+{
+  "name": "IssueReport",
+  "type": "object",
+  "properties": {
+    "hall_id": {
+      "type": "string"
+    },
+    "shared_space_id": {
+      "type": "string"
+    },
+    "space_name": {
+      "type": "string"
+    },
+    "floor": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Shower",
+        "Toilet",
+        "Leak",
+        "Laundry",
+        "Trash",
+        "Heating",
+        "Other"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Shared-space description only. Never private room details."
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "urgent"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "acknowledged",
+        "in_progress",
+        "resolved"
+      ],
+      "description": "Resident report status. Separate from an official facilities work order."
+    },
+    "confirmation_count": {
+      "type": "number",
+      "description": "How many residents confirmed the same issue"
+    },
+    "staff_note": {
+      "type": "string"
+    },
+    "official_ticket_ref": {
+      "type": "string",
+      "description": "Optional reference for a separate official maintenance ticket"
+    },
+    "is_demo": {
+      "type": "boolean"
+    },
+    "resolution_version": {
+      "type": "number",
+      "description": "Increments on every new staff-marked resolution so older feedback does not carry into a new repair cycle."
+    },
+    "resolved_at": {
+      "type": "string",
+      "description": "When staff last marked this resident report resolved; not official university repair completion."
+    }
+  },
+  "required": [
+    "hall_id",
+    "category",
+    "space_name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

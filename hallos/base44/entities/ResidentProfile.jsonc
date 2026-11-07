@@ -1,0 +1,105 @@
+{
+  "name": "ResidentProfile",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Built-in user id this profile belongs to"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "hall_id": {
+      "type": "string",
+      "description": "ResidenceHall record id the resident requested or was approved for"
+    },
+    "floor": {
+      "type": "string"
+    },
+    "room_number": {
+      "type": "string",
+      "description": "Retired: no longer collected during onboarding"
+    },
+    "membership_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "suspended"
+      ],
+      "description": "Only approved memberships grant access to hall records. Never self-assigned."
+    },
+    "membership_note": {
+      "type": "string",
+      "description": "Short note from the reviewing staff member"
+    },
+    "membership_requested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewed_by_name": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "staff_role": {
+      "type": "string",
+      "enum": [
+        "resident",
+        "ra",
+        "hall_admin"
+      ],
+      "description": "In-app staff role. Only set by approved staff assignment."
+    },
+    "staff_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "pending",
+        "approved"
+      ],
+      "description": "Staff privileges only apply when approved"
+    },
+    "is_demo": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

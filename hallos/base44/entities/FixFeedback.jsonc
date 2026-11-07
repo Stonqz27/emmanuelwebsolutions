@@ -1,0 +1,55 @@
+{
+  "name": "FixFeedback",
+  "type": "object",
+  "properties": {
+    "report_id": {
+      "type": "string"
+    },
+    "hall_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "resolution_version": {
+      "type": "number"
+    },
+    "vote": {
+      "type": "string",
+      "enum": [
+        "fixed",
+        "still_broken"
+      ],
+      "description": "Resident assessment of an issue marked resolved by staff, NOT official facilities verification."
+    }
+  },
+  "required": [
+    "report_id",
+    "hall_id",
+    "user_id",
+    "resolution_version",
+    "vote"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

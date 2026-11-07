@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 215 38% 98%;
+    --foreground: 217 52% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 219 42% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 219 42% 11%;
+    --primary: 216 66% 31%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 216 28% 96%;
+    --secondary-foreground: 219 40% 15%;
+    --muted: 220 18% 96%;
+    --muted-foreground: 218 12% 46%;
+    --accent: 24 100% 96%;
+    --accent-foreground: 22 80% 32%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 16% 91%;
+    --input: 220 16% 91%;
+    --ring: 216 66% 31%;
+    --chart-1: 25 95% 53%;
+    --chart-2: 219 42% 11%;
+    --chart-3: 199 89% 48%;
+    --chart-4: 262 83% 58%;
+    --chart-5: 160 84% 39%;
+    --radius: 1rem;
+    --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 219 42% 11%;
+    --sidebar-foreground: 220 20% 88%;
+    --sidebar-primary: 25 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 219 30% 17%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 219 28% 20%;
+    --sidebar-ring: 25 95% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: radial-gradient(ellipse 880px 340px at 100% -130px, rgba(27,67,131,.055), transparent 78%), linear-gradient(180deg, #f7f9fe 0%, #fcfdff 72%);
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-heading;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: #FEBF50;
+    color: #173A70;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .card-surface {
+    @apply rounded-3xl border border-border/70 bg-card shadow-[0_1px_2px_rgba(16,24,39,0.04),0_12px_32px_-20px_rgba(16,24,39,0.28)];
+  }
+  .tap {
+    @apply transition duration-200 active:scale-[0.985];
+  }
+}
+
+/* Accessible motion defaults, especially on phones and older laptops. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Morgan-inspired showcase treatment: distinct HallOS identity, no university logo. */
+.hallos-sidebar {
+  background: linear-gradient(172deg, #173A70 0%, #10264C 65%, #0C1D39 100%);
+}
+.hallos-hero {
+  background: linear-gradient(118deg, #142D58 0%, #1B4383 53%, #17366B 100%);
+}
+.hallos-hero-grain {
+  background-image: radial-gradient(rgba(255,255,255,.9) .6px, transparent .6px);
+  background-size: 16px 16px;
+}
+.hallos-section-title {
+  font-weight: 800;
+  color: #173A70;
+  letter-spacing: -.025em;
+}
+@media (hover: hover) {
+  .card-surface { transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+  .card-surface:hover { border-color: rgba(27,67,131,.17); }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "ResidenceHall",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Official hall name, e.g. Rawlings Hall"
+    },
+    "short_name": {
+      "type": "string",
+      "description": "Short label used in navigation and chips"
+    },
+    "description": {
+      "type": "string"
+    },
+    "front_desk_phone": {
+      "type": "string",
+      "description": "Publicly listed front desk number"
+    },
+    "resident_director": {
+      "type": "string",
+      "description": "Resident Director name shown for urgent escalation"
+    },
+    "director_office_phone": {
+      "type": "string",
+      "description": "Publicly listed Resident Director office number"
+    },
+    "info_source_url": {
+      "type": "string",
+      "description": "Public page these contact details came from"
+    },
+    "floor_count": {
+      "type": "number",
+      "description": "Number of resident floors"
+    },
+    "is_demo": {
+      "type": "boolean",
+      "description": "Demonstration hall with fictional residents and reports only"
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Available for residents to request membership"
+    },
+    "housing_key": {
+      "type": "string",
+      "description": "Stable key for the Morgan managed housing catalog"
+    },
+    "housing_type": {
+      "type": "string",
+      "description": "on_campus or off_campus; properties outside Morgan-managed housing are excluded"
+    },
+    "management_type": {
+      "type": "string",
+      "description": "University-managed housing source scope"
+    },
+    "maintenance_portal_url": {
+      "type": "string",
+      "description": "Morgan official maintenance or resident portal link"
+    },
+    "maintenance_portal_label": {
+      "type": "string",
+      "description": "Portal name shown to residents"
+    },
+    "maintenance_guidance_url": {
+      "type": "string",
+      "description": "University facilities guidance URL"
+    },
+    "after_hours_ra_phone": {
+      "type": "string",
+      "description": "Published after-hours RA number; hall-specific"
+    },
+    "shuttle_info_url": {
+      "type": "string",
+      "description": "BEARtransit off-campus residential shuttle schedules"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "name": "Announcement",
+  "type": "object",
+  "properties": {
+    "hall_id": {
+      "type": "string"
+    },
+    "floor": {
+      "type": "string",
+      "description": "Empty means the whole hall"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "General",
+        "Visitation",
+        "Maintenance",
+        "Events",
+        "Important"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "high",
+        "urgent"
+      ]
+    },
+    "publisher_id": {
+      "type": "string"
+    },
+    "publisher_name": {
+      "type": "string"
+    },
+    "publisher_role": {
+      "type": "string",
+      "description": "e.g. RA, Floor 3 or Hall Administration"
+    },
+    "requires_ack": {
+      "type": "boolean"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "is_demo": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "hall_id",
+    "title",
+    "body"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

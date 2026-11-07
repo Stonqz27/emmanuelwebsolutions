@@ -1,0 +1,39 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "hall_id": {
+      "type": "string",
+      "description": "Mirrors the approved hall only. Empty while membership is pending, rejected or suspended. Set only by trusted backend functions.",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "collaborator_role": "editor"
+          }
+        }
+      }
+    },
+    "staff_role": {
+      "type": "string",
+      "description": "Mirrors the approved in-app staff role. Set only by trusted backend functions.",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "collaborator_role": "editor"
+          }
+        }
+      }
+    },
+    "membership_status": {
+      "type": "string",
+      "description": "Mirrors the membership state. Informational only and set by trusted backend functions.",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "collaborator_role": "editor"
+          }
+        }
+      }
+    }
+  }
+}
